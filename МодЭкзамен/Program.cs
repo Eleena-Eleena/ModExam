@@ -31,10 +31,18 @@ namespace МодЭкзамен
                     Console.WriteLine("Такого листа нет.");
                     break;
             }
-            string filename = @"D:\Программирование\C#\МодЭкзамен\КритПуть.XLSX";
-            int column = 0;
-            double[,] table = Excel.GetArray(filename, listname, out column);
-
+            string filename = @"D:\Программирование\C#\МодЭкзамен\КритПуть.XLSX"; // Путь для считывания данных с Excel
+            int column;
+            double[,] table = new double[0,0];
+            try 
+            {
+                table = Excel.GetArray(filename, listname, out column);
+            }  
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ошибка при считывание из Excel файла" + ex.Message);
+            }
+            
             int n;
             int[] i = new int[20];
             int[] j = new int[20];
@@ -171,7 +179,7 @@ namespace МодЭкзамен
    /// </summary>
     public class Log
     {
-        static string filename = @"D:\Программирование\C#\МодЭкзамен\log.txt";
+        static string filename = @"D:\Программирование\C#\МодЭкзамен\log.txt"; // Путь указывается для сохранения Log файла
         /// <summary>
         /// Добавление одного сообщения в файл
         /// </summary>
@@ -182,6 +190,7 @@ namespace МодЭкзамен
             {
                 sw.WriteLine(message);
             }
+            System.Diagnostics.Debug.WriteLine(message);
         }
     }
     /// <summary>
